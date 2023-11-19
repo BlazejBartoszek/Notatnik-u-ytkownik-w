@@ -1,0 +1,54 @@
+﻿@model Notatnik_użytkowników.Models.UserModel
+
+@{
+    ViewData["Title"] = "Edycja użytkownika";
+}
+
+<h1>Edycja użytkownika</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" type="text" onkeydown="return /[a-zA-Z]/i.test(event.key)" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" type="text" onkeydown="return /[a-zA-Z]/i.test(event.key)"/>
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" max="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="control-label">
+                    <option value="mężczyzna">Mężczyzna</option>
+                    <option value="kobieta">Kobieta</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdditionalAttribute" class="control-label"></label>
+                <input asp-for="AdditionalAttribute" class="form-control" />
+                <span asp-validation-for="AdditionalAttribute" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Wróć do listy użytkowników</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
